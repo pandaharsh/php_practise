@@ -30,7 +30,7 @@ if (!$con) {
             password:
             <input type="password" name="password" /><br /><br />
             User as admin: 
-            <input type="checkbox" name="user_admin" required="required" value="1"/><br /><br />
+            <input type="checkbox" name="user_admin" value="admin"/><br /><br />
             <input type="submit"  value="Sign up"/>
         </form><br /><br />
         <form action="logout.php" method="post">
@@ -57,10 +57,10 @@ if (!$con) {
         if (!is_null($username) && !is_null($password)) {
 
             if (mysqli_query($con, $sql)) {
-                $sql = "INSERT INTO " . $TABLE_NAME . " (username, password, user_admin) values ('" . $username . "' , '" . $password . "' , " . $user_admin . ");";
+                $sql = "INSERT INTO " . $TABLE_NAME . " (username, password, user_admin) values ('" . $username . "' , '" . $password . "' , '" . $user_admin . "');";
 
             } else {
-                $sql = "CREATE TABLE " . $TABLE_NAME . "(id INT AUTO_INCREMENT PRIMARY KEY, username varchar(255), password varchar(255), user_admin INT );";
+                $sql = "CREATE TABLE " . $TABLE_NAME . "(id INT AUTO_INCREMENT PRIMARY KEY, username varchar(255), password varchar(255), user_admin varchar(255) );";
             }
 
             if (mysqli_query($con, $sql)) {

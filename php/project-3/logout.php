@@ -27,19 +27,31 @@ if (!$con) {
         $sql = " SELECT username FROM $TABLE_NAME Where username = '$username' And " . "password= '" . $password . "';";
         $result = mysqli_query($con, $sql);
 
+        $msql = "SELECT * FROM $TABLE_NAME Where username='$username' And user_admin = 'admin';";
+        $value = mysqli_query($con, $msql);
+
         if (mysqli_num_rows($result)) {
 
             echo "Hello!!, $username <br /> <br />";
 
-            $view = '<a href="show.php">
+            if (mysqli_num_rows($value)) {
+
+                $view = '<a href="show.php">
                 <button>view</button>
                 </a>';
-            echo $view;
+                echo $view;
 
-            $logout = '<a href="index.php">
+                $logout = '<a href="index.php">
                 <button>Logout</button>
                 </a>';
-            echo $logout;
+                echo $logout;
+
+            } else {
+                $logout = '<a href="index.php">
+                <button>Logout</button>
+                </a>';
+                echo $logout;
+            }
 
             if ($logout) {
                 session_destroy();
